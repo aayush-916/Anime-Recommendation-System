@@ -38,5 +38,4 @@ def index():
 
     return render_template('index.html', anime_name=anime_name, recommendations=recommendations, anime_names=anime_names)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
