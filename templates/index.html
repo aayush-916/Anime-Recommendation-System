@@ -1,0 +1,61 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Recommendation System</title>
+</head>
+<body>
+    <h1>Anime Recommendation System</h1>
+    <form method="POST">
+        <label for="anime_name">Enter Anime Name:</label>
+        <input type="text" id="anime_name" name="anime_name" required>
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    {% if recommendations is not none and not recommendations.empty %}
+        <h2>Recommendations for "{{ anime_name }}":</h2>
+        <ul>
+            {% for index, row in recommendations.iterrows() %}
+                <li>{{ row['Name'] }} - {{ row['Genres'] }} (Score: {{ row['Score'] }})</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Recommendation System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Anime Recommendation System</h1>
+    <form method="POST">
+        <label for="anime_name">Enter Anime Name:</label>
+        <input list="anime_list" id="anime_name" name="anime_name" placeholder="Start typing an anime name...">
+        
+        <!-- Datalist to provide suggestions -->
+        <datalist id="anime_list">
+            {% for name in anime_names %}
+                <option value="{{ name }}">{{ name }}</option>
+            {% endfor %}
+        </datalist>
+        
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    {% if recommendations is not none and not recommendations.empty %}
+        <h2>Recommendations for {{ anime_name }}</h2>
+        <ul>
+            {% for index, row in recommendations.iterrows() %}
+                <li>{{ row['Name'] }} (Score: {{ row['Score'] }}, Genres: {{ row['Genres'] }})</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
